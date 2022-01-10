@@ -1,0 +1,21 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.24f1 (79c78de19888) revision 7980941'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19042) 64bit Professional' Language: 'es' Physical Memory: 8162 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.3.24f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/Users/camil/RiderProjects/holbertonschool-unity/0x04-unity_publishing
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+51586
+Successfully changed project path to: C:/Users/camil/RiderProjects/holbertonschool-unity/0x04-unity_publishing
+C:/Users/camil/RiderProjects/holbertonschool-unity/0x04-unity_publishing
+Using Asset Import Pipeline V2.

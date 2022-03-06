@@ -1,70 +1,43 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject pauseMenu;
-    public GameObject mainCamera;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-    
-    }
+    public bool paused = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (!pauseMenu.activeInHierarchy)
-            {
-                Pause();
-            }
-            else if (pauseMenu.activeInHierarchy)
-            {
-                Resume();
-            }
-        }
-    }
-
-    // Pauses the game
-    public void Pause()
-    {
+    public void Pause() {
+        Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0;
-        mainCamera.GetComponent<CameraController>().enabled = false;
-        pauseMenu.SetActive(true);
+        paused = true;
+        gameObject.SetActive(true);
     }
 
-    // Resumes the currently running game
-    public void Resume()
-    {
+    public void Resume() {
+        Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
-        mainCamera.GetComponent<CameraController>().enabled = true;
-        pauseMenu.SetActive(false);
+        paused = false;
+        gameObject.SetActive(false);
     }
 
-    // Restarts the current level the player is on
-    public void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Resume();
+    public void Restart() {
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1;
+        paused = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    //
-    public void MainMenu()
-    {
+    public void MainMenu() {
+        Time.timeScale = 1;
+        paused = false;
         SceneManager.LoadScene("MainMenu");
-        Resume();
     }
 
-    //
-    public void Options()
-    {
-        PlayerPrefs.SetInt("Previous", SceneManager.GetActiveScene().buildIndex);
+    public void Options() {
+        Time.timeScale = 1;
+        paused = false;
+        PlayerPrefs.SetInt("LastScene", SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadScene("Options");
-        Resume();
     }
 }

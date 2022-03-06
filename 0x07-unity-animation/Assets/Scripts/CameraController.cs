@@ -1,42 +1,49 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private const float Y_MIN = 0.0f;
-    private const float Y_MAX = 50.0f;
-
     public Transform player;
-    private Transform camTransform;
-    public bool isInverted = false;
-    private Camera cam;
+    public PauseMenu pm;
 
-    private float distance = 6.3f;
-    private float currentX = 0.0f;
-    private float currentY = 0.0f;
-    private float sensivityX = 150f;
-    private float sensivityY = 100f;
+    public bool isInverted;
+    public float sensitivity = 6.0f;
+    public float distance = 6.25f;
 
-    private void Start()
-    {
-        camTransform = transform;
-        cam = Camera.main;
-        isInverted = (PlayerPrefs.GetInt("Inverted") == 1 ? true : false);
+    Vector3 cameraOffset;
+
+    float deltaX = 0f;
+    float deltaY = 0f;
+
+    void Start() {
+        Cursor.lockState = CursorLockMode.Locked;
+        if (PlayerPrefs.GetInt("Inverted") == 1) {
+            isInverted = true;
+        } else {
+            isInverted = false;
+        }
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
-        currentX += Input.GetAxis("Mouse X") * sensivityX * Time.deltaTime;
-        currentY += Input.GetAxis("Mouse Y") * (isInverted ? 1 : -1) * sensivityY * Time.deltaTime;
-        currentY = Mathf.Clamp(currentY, Y_MIN, Y_MAX);
+        if (!pm.paused) {
+            deltaX += Input.GetAxisRaw("Mouse X");
+            if (isInverted) {
+                deltaY = Mathf.Clamp(deltaY + Input.GetAxisRaw("Mouse Y"), -14f, 14f);
+            } else {
+                deltaY = Mathf.Clamp(deltaY - Input.GetAxisRaw("Mouse Y"), -14f, 14f);
+            }
+        }
     }
-    
-    private void LateUpdate()
-    {
-        Vector3 dir = new Vector3(0, 0, -distance);
-        Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-        camTransform.position = player.position + rotation * dir;
-        camTransform.LookAt(player.position);
+
+    void LateUpdate() {
+        if (!pm.paused) {
+            Quaternion rotation = Quaternion.Euler(deltaY * sensitivity, deltaX * sensitivity, 0);
+
+            transform.position = player.position + rotation * new Vector3(0, 0, -distance);
+            transform.LookAt(player);
+        }
     }
 }

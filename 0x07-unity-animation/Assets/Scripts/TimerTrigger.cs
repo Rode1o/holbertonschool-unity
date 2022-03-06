@@ -1,13 +1,14 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TimerTrigger : MonoBehaviour
 {
-    public GameObject player;
+    public Timer timer;
 
-    void OnTriggerExit(Collider other)
-    {
-        player.GetComponent<Timer>().enabled = true;
+    void OnTriggerExit(Collider other) {
+        if (other.gameObject == timer.gameObject) {
+            timer.enabled = true;
+        }
     }
 }

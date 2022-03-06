@@ -1,34 +1,23 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class WinMenu : MonoBehaviour
 {
-    private int nextScene;
-    private int totalScenes;
+    public PauseMenu pm;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        nextScene = SceneManager.GetActiveScene().buildIndex + 1;
-        totalScenes = SceneManager.sceneCountInBuildSettings - 1;
-    }
+    public string nextScene;
 
-    public void MainMenu()
-    {
+    public void MainMenu() {
+        Time.timeScale = 1;
+        pm.paused = false;
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void Next()
-    {
-        if (nextScene > totalScenes)
-        {
-            MainMenu();
-        }
-        else
-        {
-            SceneManager.LoadScene(nextScene);
-        }
+    public void Next() {
+        Time.timeScale = 1;
+        pm.paused = false;
+        SceneManager.LoadScene(nextScene);
     }
 }

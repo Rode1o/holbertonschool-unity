@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Samples/WebXR Interactions/0.14.1-preview/Sample Scene/Scenes/Desert.unity
     guid: 85380d4847db7b74a850284461349c36
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     WebXR.Settings: {fileID: 11400000, guid: efc5061125f68b544ac89611579cf49d, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: ae5da71a29287ee4ca54c49231c04c43, type: 2}
